@@ -70,7 +70,7 @@ void led_set(boolean value, boolean flag){
 
   /* SECOND SENSOR */
   else {
-    if (value = false){
+    if (value = true){
       digitalWrite(red[1], HIGH);
       digitalWrite(green[1], LOW);
     }
@@ -93,8 +93,8 @@ void setup() {
   }
 
   /* set initial states of leds (green led is high) */
+  led_set(false, true);
   led_set(false, false);
-  led_set(true, false);
 
   /* set trigger & Echo pin modes */
   for (byte i=0; i<2; i++){
@@ -145,7 +145,7 @@ void loop() {
     led_set(false, true);
   }
 
-  if (distance[0] >= MAX_DISTANCE || distance[0] < MIN_DISTANCE){
+  if (distance[1] >= MAX_DISTANCE || distance[1] < MIN_DISTANCE){
     Serial.println("<-----Out of range----->");
     led_set(true, false);
   }
