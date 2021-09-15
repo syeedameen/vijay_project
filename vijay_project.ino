@@ -128,7 +128,7 @@ void loop() {
   digitalWrite(trigger[1], LOW);
 
   /* Measure the response from sensor pins ECHO */
-  duration[0] = pulseIn(echo[1], HIGH);
+  duration[1] = pulseIn(echo[1], HIGH);
 
   /* Determine distance from duration */
   /* Use 343 meters/sec as speed of sound (if humidity is constant) */
