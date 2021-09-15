@@ -70,7 +70,7 @@ void led_set(boolean value, boolean flag){
 
   /* SECOND SENSOR */
   else {
-    if (value = true){
+    if (value = false){
       digitalWrite(red[1], HIGH);
       digitalWrite(green[1], LOW);
     }
