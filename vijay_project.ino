@@ -33,53 +33,53 @@
 #define MIN_DISTANCE  2 
 
 /* Led pins statically declare in EEPROM  (make sure your pins are active high)*/
-static byte green[] = {8,12};
-static byte red[]   = {7,11};
+static byte green[] = {3,4};
+static byte red[]   = {5,6};
 
 /* sensor pins statically declare in EEPROM */
-static byte trigger[] = {9,6};
-static byte echo[]    = {3,4};
+static byte trigger[] = {7,8};
+static byte echo[]    = {9,10};
   
 float distance[2];
 float duration[2];
 
 
-
-/* procedure that set the initial state of leds */
-void led_set(boolean value, boolean flag){
-  /*
-    flag = true:      SENSOR NUMBER 1 
-    flag = false:     SENSOR NUMBER 2 
-    
-    value = true:     SENSOR OUT OF RANGE (red led high)
-    value = false:    PRINT VALUE  (green led high)
-  */
-  
-
-  /* FIRST SENSOR  */
-  if (flag = true){
-    if (value = true){
-      digitalWrite(red[0], HIGH);
-      digitalWrite(green[0], LOW);
-    }
-    else {
-      digitalWrite(red[0], LOW);
-      digitalWrite(green[0], HIGH);
-    }
-  }
-
-  /* SECOND SENSOR */
-  else {
-    if (value = true){
-      digitalWrite(red[1], HIGH);
-      digitalWrite(green[1], LOW);
-    }
-    else {
-      digitalWrite(red[1], LOW);
-      digitalWrite(green[1], HIGH);
-    }
-  }
-}
+//
+///* procedure that set the initial state of leds */
+//void led_set(boolean value, boolean flag){
+//  /*
+//    flag = true:      SENSOR NUMBER 1 
+//    flag = false:     SENSOR NUMBER 2 
+//    
+//    value = true:     SENSOR OUT OF RANGE (red led high)
+//    value = false:    PRINT VALUE  (green led high)
+//  */
+//  
+//
+//  /* FIRST SENSOR  */
+//  if (flag = true){
+//    if (value = true){
+//      digitalWrite(red[0], HIGH);
+//      digitalWrite(green[0], LOW);
+//    }
+//    else {
+//      digitalWrite(red[0], LOW);
+//      digitalWrite(green[0], HIGH);
+//    }
+//  }
+//
+//  /* SECOND SENSOR */
+//  else {
+//    if (value = true){
+//      digitalWrite(red[1], HIGH);
+//      digitalWrite(green[1], LOW);
+//    }
+//    else {
+//      digitalWrite(red[1], LOW);
+//      digitalWrite(green[1], HIGH);
+//    }
+//  }
+//}
 
 
 
@@ -93,8 +93,10 @@ void setup() {
   }
 
   /* set initial states of leds (green led is high) */
-  led_set(false, true);
-  led_set(false, false);
+  for (byte i=0; i<2; i++){
+    digitalWrite(red[i], LOW);
+    digitalWrite(green[i], LOW);
+  }
 
   /* set trigger & Echo pin modes */
   for (byte i=0; i<2; i++){
@@ -136,23 +138,33 @@ void loop() {
 
   Serial.print(" Distance = ");
   if (distance[0] >= MAX_DISTANCE || distance[0] < MIN_DISTANCE){
-    Serial.println("<-----Out of range----->");
-    led_set(true, true);
+    Serial.println(" sensor 1 <-----Out of range----->");
+//    led_set(true, true);
+      digitalWrite(red[0], HIGH);
+      digitalWrite(green[0], LOW);
   }
   else {
+    Serial.println("Sensor 1 ");
     Serial.print(distance[0]);
     Serial.println(" CM ");
-    led_set(false, true);
+//    led_set(false, true);
+      digitalWrite(red[0], LOW);
+      digitalWrite(green[0], HIGH);
   }
 
   if (distance[1] >= MAX_DISTANCE || distance[1] < MIN_DISTANCE){
-    Serial.println("<-----Out of range----->");
-    led_set(true, false);
+    Serial.println(" sensor 2 <-----Out of range----->");
+//    led_set(true, false);
+      digitalWrite(red[1], HIGH);
+      digitalWrite(green[1], LOW);
   }
   else { 
+    Serial.println("Sensor 2 ");
     Serial.print(distance[1]);
     Serial.println(" CM ");
-    led_set(false, false);
+//    led_set(false, false);
+      digitalWrite(red[1], LOW);
+      digitalWrite(green[1], HIGH);
   }
   delay(500);           /* set delay according to your requirment */
 }
