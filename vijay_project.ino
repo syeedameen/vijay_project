@@ -37,8 +37,8 @@ static byte green[] = {8,12};
 static byte red[]   = {7,11};
 
 /* sensor pins statically declare in EEPROM */
-static byte trigger[] = {10,5};
-static byte echo[]    = {13,6};
+static byte trigger[] = {9,6};
+static byte echo[]    = {3,4};
   
 float distance[2];
 float duration[2];
