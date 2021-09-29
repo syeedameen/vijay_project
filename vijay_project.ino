@@ -43,46 +43,6 @@ static byte echo[]    = {9,10};
 float distance[2];
 float duration[2];
 
-
-//
-///* procedure that set the initial state of leds */
-//void led_set(boolean value, boolean flag){
-//  /*
-//    flag = true:      SENSOR NUMBER 1 
-//    flag = false:     SENSOR NUMBER 2 
-//    
-//    value = true:     SENSOR OUT OF RANGE (red led high)
-//    value = false:    PRINT VALUE  (green led high)
-//  */
-//  
-//
-//  /* FIRST SENSOR  */
-//  if (flag = true){
-//    if (value = true){
-//      digitalWrite(red[0], HIGH);
-//      digitalWrite(green[0], LOW);
-//    }
-//    else {
-//      digitalWrite(red[0], LOW);
-//      digitalWrite(green[0], HIGH);
-//    }
-//  }
-//
-//  /* SECOND SENSOR */
-//  else {
-//    if (value = true){
-//      digitalWrite(red[1], HIGH);
-//      digitalWrite(green[1], LOW);
-//    }
-//    else {
-//      digitalWrite(red[1], LOW);
-//      digitalWrite(green[1], HIGH);
-//    }
-//  }
-//}
-
-
-
 /* setup all the Input/Output */
 void setup() {
   Serial.begin(9600);
@@ -139,7 +99,7 @@ void loop() {
   Serial.print(" Distance = ");
   if (distance[0] >= MAX_DISTANCE || distance[0] < MIN_DISTANCE){
     Serial.println(" sensor 1 <-----Out of range----->");
-//    led_set(true, true);
+      
       digitalWrite(red[0], HIGH);
       digitalWrite(green[0], LOW);
   }
@@ -147,14 +107,14 @@ void loop() {
     Serial.println("Sensor 1 ");
     Serial.print(distance[0]);
     Serial.println(" CM ");
-//    led_set(false, true);
+
       digitalWrite(red[0], LOW);
       digitalWrite(green[0], HIGH);
   }
 
   if (distance[1] >= MAX_DISTANCE || distance[1] < MIN_DISTANCE){
     Serial.println(" sensor 2 <-----Out of range----->");
-//    led_set(true, false);
+
       digitalWrite(red[1], HIGH);
       digitalWrite(green[1], LOW);
   }
@@ -162,7 +122,7 @@ void loop() {
     Serial.println("Sensor 2 ");
     Serial.print(distance[1]);
     Serial.println(" CM ");
-//    led_set(false, false);
+
       digitalWrite(red[1], LOW);
       digitalWrite(green[1], HIGH);
   }
